@@ -4,20 +4,27 @@ import Deck from '../components/Deck';
 import EmptyView from '../components/EmptyView';
 import StandardButton from '../components/StandardButton';
 
-const DeckList = props => (
-  <View style={styles.container}>
-    <View style={styles.empty}>
-      <EmptyView
-        style={styles.empty}
-        emptyMessage="You haven't created any Decks yet!"
-        emptySubMessage="Why not click the button below and create one?"
-      />
+const DeckScreen = props => {
+  const { navigate } = props.navigation;
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.empty}>
+        <EmptyView
+          style={styles.empty}
+          emptyMessage="You haven't created any Decks yet!"
+          emptySubMessage="Why not click the button below and create one?"
+        />
+      </View>
+      <View style={styles.addDeckButton}>
+        <StandardButton
+          title="+"
+          buttonPressed={() => navigate('NewDeckScreen')}
+        />
+      </View>
     </View>
-    <View style={styles.addDeckButton}>
-      <StandardButton title="+" buttonPressed={() => console.log('pressed')} />
-    </View>
-  </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -35,4 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DeckList;
+export default DeckScreen;
