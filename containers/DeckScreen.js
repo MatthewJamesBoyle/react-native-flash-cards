@@ -51,11 +51,12 @@ class DeckScreen extends Component {
             {this.state.decks.map(deck => (
               <TouchableOpacity
                 key={Object.keys(deck)}
-                onPress={() => navigate('AddQuestionScreen')}
+                onPress={() => navigate('SingleDeckScreen', deck)}
               >
                 <Deck
                   title={deck[Object.keys(deck)].title}
-                  body="This Deck contains x Questions"
+                  body={`This Deck contains ${deck[Object.keys(deck)].questions
+                    .length} Questions`}
                 />
               </TouchableOpacity>
             ))}
