@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import AddQuestionView from '../components/AddQuestionView';
 
-const AddQuestion = props => (
-  <View>
-    <Text> This is add question view</Text>
-  </View>
-);
+class AddQuestion extends Component {
+  render() {
+    const { navigate } = this.props.navigation;
+    return <AddQuestionView onCancelPressed={() => navigate('DeckScreen')} />;
+  }
+}
+
+addButtonPressed = ({ question, answer }) => {};
 
 export default AddQuestion;
