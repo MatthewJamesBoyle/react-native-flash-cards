@@ -27,7 +27,7 @@ export default class AddDeckView extends Component {
           />
           <PrimaryButton
             title="Submit"
-            buttonPressed={e => this.props.onSubmitPress(e.target.value)}
+            buttonPressed={() => this.props.onSubmitPress(this.state.deckTitle)}
           />
         </View>
       </View>

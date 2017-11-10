@@ -1,31 +1,95 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { Component } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  AsyncStorage,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import Deck from '../components/Deck';
 import EmptyView from '../components/EmptyView';
 import StandardButton from '../components/StandardButton';
 
-const DeckScreen = props => {
-  const { navigate } = props.navigation;
+class DeckScreen extends Component {
+  state = {
+    decks: [],
+    loading: true,
+  };
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.empty}>
-        <EmptyView
-          style={styles.empty}
-          emptyMessage="You haven't created any Decks yet!"
-          emptySubMessage="Why not click the button below and create one?"
-        />
-      </View>
-      <View style={styles.addDeckButton}>
-        <StandardButton
-          title="+"
-          buttonPressed={() => navigate('NewDeckScreen')}
-        />
-      </View>
-    </View>
-  );
-};
+  componentWillMount() {
+    this.prepareState();
+  }
 
+  render() {
+    const { navigate } = this.props.navigation;
+    if (this.state.loading) {
+      return <View>Loading</View>;
+    }
+    if (this.state.decks.length === 0) {
+      return (
+        <View style={styles.container}>
+          <View style={styles.empty}>
+            <EmptyView
+              style={styles.empty}
+              emptyMessage="You haven't created any Decks yet!"
+              emptySubMessage="Why not click the button below and create one?"
+            />
+          </View>
+          <View style={styles.addDeckButton}>
+            <StandardButton
+              title="+"
+              buttonPressed={() => navigate('NewDeckScreen')}
+            />
+          </View>
+        </View>
+      );
+    } else {
+      return (
+        <ScrollView>
+          <View>
+            {this.state.decks.map(deck => (
+              <TouchableOpacity
+                key={Object.keys(deck)}
+                onPress={() => navigate('AddQuestionScreen')}
+              >
+                <Deck
+                  title={deck[Object.keys(deck)].title}
+                  body="This Deck contains x Questions"
+                />
+              </TouchableOpacity>
+            ))}
+          </View>
+          <View style={styles.addDeckButton}>
+            <StandardButton
+              title="+"
+              buttonPressed={() => navigate('NewDeckScreen')}
+            />
+          </View>
+        </ScrollView>
+      );
+    }
+  }
+
+  prepareState = () => {
+    AsyncStorage.getAllKeys()
+      .then(keys => {
+        AsyncStorage.multiGet(keys, (err, stores) => {
+          stores.map((result, i, store) => {
+            const key = store[i][0];
+            const value = JSON.parse(store[i][1]);
+            this.setState({
+              decks: [...this.state.decks, { [key]: value }],
+            });
+          });
+        });
+      })
+      .catch(e => console.log(e));
+    this.setState({
+      loading: false,
+    });
+  };
+}
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
