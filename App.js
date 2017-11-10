@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
-import DeckScreen from './containers/DeckScreen';
+import Navigation from './Navigation';
 
 export default class App extends React.Component {
   render() {
-    return <DeckScreen />;
+    return <Navigation />;
   }
 }
