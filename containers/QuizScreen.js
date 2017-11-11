@@ -13,7 +13,7 @@ export default class QuizScreen extends Component {
   componentDidMount() {
     this.interval = setInterval(() => {
       this.updateStateOrReset();
-    }, 50);
+    }, 1000);
   }
 
   render() {
