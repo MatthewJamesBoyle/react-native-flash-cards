@@ -19,6 +19,7 @@ export default class QuizView extends Component {
       quitPressed,
       submitPressed,
       markedCorrect,
+      markedIncorrect,
       showAnswer,
     } = this.props;
 
@@ -58,6 +59,10 @@ export default class QuizView extends Component {
             buttonPressed={e => markedCorrect()}
           />
           <PrimaryButton
+            title="Mark Incorrect"
+            buttonPressed={e => markedIncorrect()}
+          />
+          <PrimaryButton
             title="Show Answer"
             buttonPressed={e => showAnswer()}
           />
@@ -78,32 +83,34 @@ export default class QuizView extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
+    marginTop: 2,
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
   },
   sub: {
+    marginTop: 8,
     fontSize: 10,
     textAlign: 'center',
   },
   question: {
-    fontSize: 50,
+    marginTop: 8,
+    fontSize: 40,
     textAlign: 'center',
   },
   buttonContainer: {
-    marginTop: 30,
     display: 'flex',
   },
   answer: {
     width: 250,
-    marginTop: 50,
+    marginTop: 10,
+    textAlign: 'center',
   },
   score: {
     marginLeft: 60,
   },
   topContainer: {
-    marginTop: 10,
+    marginTop: 5,
     display: 'flex',
     flexDirection: 'row',
   },

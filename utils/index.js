@@ -16,7 +16,7 @@ export const showAlert = (title, message, CancelText) => {
   );
 };
 
-function createNotification() {
+createNotification = () => {
   return {
     title: 'Study!',
     body: "👋 don't forget to make time to study",
@@ -30,7 +30,7 @@ function createNotification() {
       vibrate: true,
     },
   };
-}
+};
 
 export function setLocalNotification() {
   AsyncStorage.getItem(NOTIFICATION_KEY)

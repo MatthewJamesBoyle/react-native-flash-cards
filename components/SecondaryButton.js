@@ -10,7 +10,7 @@ const SecondaryButton = props => (
 const styles = StyleSheet.create({
   button: {
     backgroundColor: '#d9534f',
-    width: 180,
+    width: 160,
     height: 60,
     justifyContent: 'center',
     borderColor: 'black',

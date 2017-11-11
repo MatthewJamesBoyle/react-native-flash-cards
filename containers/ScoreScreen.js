@@ -10,8 +10,8 @@ export default class ScoreScreen extends Component {
         <ScoreView score={this.props.score} />
         <View style={styles.buttonContainer}>
           <PrimaryButton
-            title="Go Home"
-            buttonPressed={this.props.scoreHomePressed}
+            title="Back To Deck"
+            buttonPressed={this.props.scoreDeckPressed}
           />
           <PrimaryButton
             title="Quiz again"

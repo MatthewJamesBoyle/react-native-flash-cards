@@ -1,6 +1,8 @@
 {
   "expo": {
     "name": "Ultimate Flash Cards",
+    "icon": "./appIcons/web_hi_res_512.png",
+
     "slug": "ultimate-flash-cards",
     "version": "1.0.0",
     "sdkVersion": "22.0.0",

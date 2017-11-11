@@ -4,13 +4,21 @@ import { View, Text } from 'react-native';
 import ScoreScreen from '../containers/ScoreScreen';
 
 export default class QuizScreen extends Component {
-  state = {
-    secondsElapsed: 15,
-    currentIndex: 0,
-    score: 0,
-    completeFlag: false,
-    statusText: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      secondsElapsed: 15,
+      currentIndex: 0,
+      score: 0,
+      completeFlag: false,
+      statusText: '',
+      deck: props.navigation.state.params,
+      questions:
+        props.navigation.state.params[
+          Object.keys(props.navigation.state.params)
+        ].questions,
+    };
+  }
   componentDidMount() {
     this.interval = setInterval(() => {
       this.updateStateOrReset();
@@ -23,18 +31,16 @@ export default class QuizScreen extends Component {
       return (
         <ScoreScreen
           score={this.state.score}
-          scoreHomePressed={() => this.props.navigation.navigate('DeckScreen')}
+          scoreDeckPressed={() =>
+            this.props.navigation.navigate('SingleDeckScreen', this.state.deck)}
           scoreRestartQuizPressed={() =>
-            this.props.navigation.navigate(
-              'QuizScreen',
-              this.props.navigation.state.params,
-            )}
+            this.props.navigation.navigate('QuizScreen', this.state.deck)}
         />
       );
     } else {
       return (
         <QuizView
-          questions={this.props.navigation.state.params}
+          questions={this.state.questions}
           secondsElapsed={this.state.secondsElapsed}
           currentQuestionIndex={this.state.currentIndex}
           quitPressed={() => this.props.navigation.navigate('DeckScreen')}
@@ -42,6 +48,7 @@ export default class QuizScreen extends Component {
           score={this.state.score}
           statusText={this.state.statusText}
           markedCorrect={this.markCorrect}
+          markedIncorrect={this.markIncorrect}
           showAnswer={this.showAnswer}
         />
       );
@@ -49,9 +56,7 @@ export default class QuizScreen extends Component {
   }
 
   validateAnswer = givenAnswer => {
-    const currentItem = this.props.navigation.state.params[
-      this.state.currentIndex
-    ];
+    const currentItem = this.state.questions[this.state.currentIndex];
     const key = Object.keys(currentItem);
     const correctAnswer = currentItem[key];
     console.log(correctAnswer);
@@ -72,15 +77,13 @@ export default class QuizScreen extends Component {
   };
 
   checkComplete = () => {
-    return this.state.currentIndex === this.props.navigation.state.params.length
+    return this.state.currentIndex === this.state.questions.length
       ? true
       : false;
   };
 
   markCorrect = () => {
-    const currentItem = this.props.navigation.state.params[
-      this.state.currentIndex
-    ];
+    const currentItem = this.state.questions[this.state.currentIndex];
     const key = Object.keys(currentItem);
     const correctAnswer = currentItem[key];
     this.setState(prev => {
@@ -93,10 +96,22 @@ export default class QuizScreen extends Component {
     });
   };
 
+  markIncorrect = () => {
+    const currentItem = this.state.questions[this.state.currentIndex];
+    const key = Object.keys(currentItem);
+    const correctAnswer = currentItem[key];
+    this.setState(prev => {
+      return {
+        secondsElapsed: 15,
+        currentIndex: prev.currentIndex + 1,
+        score: prev.score - 1,
+        statusText: `Marked wrong, correct answer was ${correctAnswer}`,
+      };
+    });
+  };
+
   showAnswer = () => {
-    const currentItem = this.props.navigation.state.params[
-      this.state.currentIndex
-    ];
+    const currentItem = this.state.questions[this.state.currentIndex];
     const key = Object.keys(currentItem);
     const correctAnswer = currentItem[key];
     this.setState({

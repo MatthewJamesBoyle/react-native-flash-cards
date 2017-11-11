@@ -7,8 +7,9 @@ import SecondaryButton from '../components/SecondaryButton';
 export default class SingleDeckScreen extends Component {
   render() {
     const { navigate, state } = this.props.navigation;
-    const title = Object.keys(state.params)[0];
-    const questions = state.params[Object.keys(state.params)].questions;
+    const deck = state.params;
+    const title = Object.keys(deck)[0];
+    const questions = deck[Object.keys(deck)].questions;
     const mainView =
       questions.length === 0 ? (
         <EmptyView
@@ -18,6 +19,9 @@ export default class SingleDeckScreen extends Component {
       ) : (
         <View>
           <Text style={styles.mainTitle}>{`Your "${title}" Deck`}</Text>
+          <Text style={styles.questionSub}>
+            {`This deck contains ${questions.length} question(s)`}
+          </Text>
         </View>
       );
     return (
@@ -28,13 +32,12 @@ export default class SingleDeckScreen extends Component {
           {questions.length >= 1 && (
             <PrimaryButton
               title="Start a quiz"
-              buttonPressed={e => navigate('QuizScreen', questions)}
+              buttonPressed={e => navigate('QuizScreen', deck)}
             />
           )}
           <SecondaryButton
             title="Add Question"
-            buttonPressed={e =>
-              navigate('AddQuestionScreen', Object.keys(state.params))}
+            buttonPressed={e => navigate('AddQuestionScreen', deck)}
           />
         </View>
       </View>
@@ -45,7 +48,7 @@ export default class SingleDeckScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    marginTop: 70,
+    marginTop: 30,
   },
   mainTitle: {
     fontSize: 50,
@@ -56,9 +59,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
+  questionSub: {
+    textAlign: 'center',
+  },
   emoji: {
     textAlign: 'center',
     fontSize: 50,
-    margin: 50,
+    margin: 30,
   },
 });

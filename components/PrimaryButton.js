@@ -10,7 +10,7 @@ const PrimaryButton = props => (
 const styles = StyleSheet.create({
   button: {
     backgroundColor: '#5cb85c',
-    width: 180,
+    width: 160,
     height: 60,
     justifyContent: 'center',
     borderColor: 'black',

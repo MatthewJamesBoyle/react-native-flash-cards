@@ -5,7 +5,7 @@ import { showAlert } from '../utils';
 
 class AddQuestion extends Component {
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigate, state } = this.props.navigation;
     return (
       <AddQuestionView
         onCancelPressed={() => navigate('DeckScreen')}
@@ -15,7 +15,7 @@ class AddQuestion extends Component {
   }
   addButtonPressed = ({ question, answer }) => {
     const { params } = this.props.navigation.state;
-    const key = params[0];
+    const key = Object.keys(params)[0];
     AsyncStorage.getItem(key).then(item => {
       const parsedItem = JSON.parse(item);
       const currentQs = parsedItem.questions;
@@ -24,7 +24,7 @@ class AddQuestion extends Component {
       const updatedItem = JSON.stringify(parsedItem);
       AsyncStorage.mergeItem(key, updatedItem, (err, result) => {
         showAlert('Boom!', 'question Added!', '...ok');
-        this.props.navigation.navigate('DeckScreen');
+        this.props.navigation.navigate('SingleDeckScreen', params);
       });
     });
   };
