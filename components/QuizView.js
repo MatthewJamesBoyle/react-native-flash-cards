@@ -18,6 +18,8 @@ export default class QuizView extends Component {
       secondsElapsed,
       quitPressed,
       submitPressed,
+      markedCorrect,
+      showAnswer,
     } = this.props;
 
     return (
@@ -47,9 +49,23 @@ export default class QuizView extends Component {
             title="submit"
             buttonPressed={e => submitPressed(this.state.userAnswer)}
           />
+          <PrimaryButton
+            title="Mark Correct"
+            buttonPressed={e => markedCorrect()}
+          />
+          <PrimaryButton
+            title="Show Answer"
+            buttonPressed={e => showAnswer()}
+          />
         </View>
         <View>
           <Text style={styles.score}>{`Score : ${this.props.score}`}</Text>
+        </View>
+        <View>
+          <Text style={styles.score}>{`Questions Remaining: ${this.props
+            .questions.length -
+            1 -
+            currentQuestionIndex}`}</Text>
         </View>
         <View>
           <Text style={styles.score}>{this.props.statusText}</Text>

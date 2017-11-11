@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import QuizView from '../components/QuizView';
+import { View, Text } from 'react-native';
 import ScoreScreen from '../containers/ScoreScreen';
 
 export default class QuizScreen extends Component {
@@ -17,11 +18,17 @@ export default class QuizScreen extends Component {
   }
 
   render() {
-    if (this.state.completeFlag) {
+    if (this.checkComplete()) {
+      clearInterval(this.interval);
       return (
         <ScoreScreen
           score={this.state.score}
           scoreHomePressed={() => this.props.navigation.navigate('DeckScreen')}
+          scoreRestartQuizPressed={() =>
+            this.props.navigation.navigate(
+              'QuizScreen',
+              this.props.navigation.state.params,
+            )}
         />
       );
     } else {
@@ -34,12 +41,11 @@ export default class QuizScreen extends Component {
           submitPressed={this.validateAnswer}
           score={this.state.score}
           statusText={this.state.statusText}
+          markedCorrect={this.markCorrect}
+          showAnswer={this.showAnswer}
         />
       );
     }
-  }
-  componentWillUnmount() {
-    clearInterval(this.interval);
   }
 
   validateAnswer = givenAnswer => {
@@ -66,20 +72,39 @@ export default class QuizScreen extends Component {
   };
 
   checkComplete = () => {
+    return this.state.currentIndex === this.props.navigation.state.params.length
+      ? true
+      : false;
+  };
+
+  markCorrect = () => {
+    const currentItem = this.props.navigation.state.params[
+      this.state.currentIndex
+    ];
+    const key = Object.keys(currentItem);
+    const correctAnswer = currentItem[key];
+    this.setState(prev => {
+      return {
+        secondsElapsed: 15,
+        currentIndex: prev.currentIndex + 1,
+        score: prev.score + 1,
+        statusText: `Marked Correct, correct answer was ${correctAnswer}`,
+      };
+    });
+  };
+
+  showAnswer = () => {
+    const currentItem = this.props.navigation.state.params[
+      this.state.currentIndex
+    ];
+    const key = Object.keys(currentItem);
+    const correctAnswer = currentItem[key];
     this.setState({
-      completeFlag:
-        this.state.currentIndex ===
-        this.props.navigation.state.params.length - 1
-          ? true
-          : false,
+      statusText: `Answer: ${correctAnswer}`,
     });
   };
 
   updateStateOrReset = () => {
-    this.checkComplete();
-    if (this.state.completeFlag) {
-      return;
-    }
     this.setState((prev, props) => {
       return prev.secondsElapsed !== 0
         ? {

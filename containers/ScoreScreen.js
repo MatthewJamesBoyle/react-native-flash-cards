@@ -13,6 +13,10 @@ export default class ScoreScreen extends Component {
             title="Go Home"
             buttonPressed={this.props.scoreHomePressed}
           />
+          <PrimaryButton
+            title="Quiz again"
+            buttonPressed={this.props.scoreRestartQuizPressed}
+          />
         </View>
       </View>
     );
@@ -26,5 +30,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 30,
+    flexDirection: 'row',
   },
 });
