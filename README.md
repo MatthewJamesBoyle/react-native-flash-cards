@@ -22,3 +22,5 @@ to get it loaded up. This app was developed specifically for the iOS. But should
 * Show how many questions are remaining on the screen.
 * When the score is displayed, buttons are displayed to either start the quiz over or go back to the Individual Deck view.
 * Tidy up UI.
+* Add Nav Bar to android.
+* Make layout work for both ios and android. 
