@@ -24,8 +24,13 @@ export default class QuizView extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.timer}>
-          <Text>{`Time Remaining: ${secondsElapsed}`}</Text>
+        <View style={styles.topContainer}>
+          <View style={styles.timer}>
+            <Text>{`Time Remaining: ${secondsElapsed}`}</Text>
+          </View>
+          <View>
+            <Text style={styles.score}>{`Score : ${this.props.score}`}</Text>
+          </View>
         </View>
         <View>
           <Text style={styles.sub}>
@@ -44,7 +49,6 @@ export default class QuizView extends Component {
         />
         <View />
         <View style={styles.buttonContainer}>
-          <SecondaryButton title="Quit" buttonPressed={quitPressed} />
           <PrimaryButton
             title="submit"
             buttonPressed={e => submitPressed(this.state.userAnswer)}
@@ -57,18 +61,15 @@ export default class QuizView extends Component {
             title="Show Answer"
             buttonPressed={e => showAnswer()}
           />
+          <SecondaryButton title="Quit" buttonPressed={quitPressed} />
         </View>
         <View>
-          <Text style={styles.score}>{`Score : ${this.props.score}`}</Text>
-        </View>
-        <View>
-          <Text style={styles.score}>{`Questions Remaining: ${this.props
-            .questions.length -
+          <Text>{`Questions Remaining: ${this.props.questions.length -
             1 -
             currentQuestionIndex}`}</Text>
         </View>
         <View>
-          <Text style={styles.score}>{this.props.statusText}</Text>
+          <Text>{this.props.statusText}</Text>
         </View>
       </View>
     );
@@ -93,9 +94,17 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: 30,
     display: 'flex',
-    flexDirection: 'row',
+  },
+  answer: {
+    width: 250,
+    marginTop: 50,
   },
   score: {
-    marginTop: 30,
+    marginLeft: 60,
+  },
+  topContainer: {
+    marginTop: 10,
+    display: 'flex',
+    flexDirection: 'row',
   },
 });

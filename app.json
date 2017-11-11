@@ -1,5 +1,14 @@
 {
   "expo": {
-    "sdkVersion": "22.0.0"
+    "name": "Ultimate Flash Cards",
+    "slug": "ultimate-flash-cards",
+    "version": "1.0.0",
+    "sdkVersion": "22.0.0",
+    "ios": {
+      "bundleIdentifier": "boyle.matt.ultimateflashcards"
+    },
+    "android": {
+      "package": "boyle.matt.ultimateflashcards"
+    }
   }
 }

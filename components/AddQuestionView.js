@@ -28,13 +28,13 @@ class AddQuestionView extends Component {
           />
         </View>
         <View style={styles.buttonRow}>
-          <SecondaryButton
-            title="Cancel"
-            buttonPressed={e => this.props.onCancelPressed()}
-          />
           <PrimaryButton
             title="Add"
             buttonPressed={e => this.props.onAddPressed(this.state)}
+          />
+          <SecondaryButton
+            title="Cancel"
+            buttonPressed={e => this.props.onCancelPressed()}
           />
         </View>
       </View>
@@ -52,15 +52,16 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   questions: {
-    marginTop: 30,
+    width: 250,
+    marginTop: 50,
   },
   answer: {
-    marginTop: 30,
+    width: 250,
+    marginTop: 50,
   },
   buttonRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: 180,
     justifyContent: 'space-between',
     marginTop: 30,
   },

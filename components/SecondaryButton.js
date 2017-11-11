@@ -10,14 +10,15 @@ const SecondaryButton = props => (
 const styles = StyleSheet.create({
   button: {
     backgroundColor: '#d9534f',
-    width: 80,
-    height: 30,
+    width: 180,
+    height: 60,
     justifyContent: 'center',
     borderColor: 'black',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
+    margin: 10,
   },
   buttonText: {
     textAlign: 'center',

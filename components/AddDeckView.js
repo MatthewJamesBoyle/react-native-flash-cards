@@ -21,13 +21,13 @@ export default class AddDeckView extends Component {
           />
         </View>
         <View style={styles.buttonRow}>
-          <SecondaryButton
-            title="Go Back"
-            buttonPressed={e => this.props.backButtonPress()}
-          />
           <PrimaryButton
             title="Submit"
             buttonPressed={() => this.props.onSubmitPress(this.state.deckTitle)}
+          />
+          <SecondaryButton
+            title="Go Back"
+            buttonPressed={e => this.props.backButtonPress()}
           />
         </View>
       </View>
@@ -46,19 +46,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   enterDeckBox: {
-    backgroundColor: 'white',
-    height: 30,
     width: 250,
     marginTop: 50,
-    borderRadius: 4,
-    borderWidth: 0.5,
-    borderColor: '#d6d7da',
   },
   buttonRow: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    width: 180,
     justifyContent: 'space-between',
     marginTop: 30,
   },

@@ -23,17 +23,15 @@ const styles = StyleSheet.create({
     marginRight: 40,
     marginTop: 40,
     paddingBottom: 40,
-    height: 150,
+    minHeight: 150,
   },
   cardHeader: {
     borderColor: '#d6d7da',
     borderWidth: 0.5,
-    height: 40,
   },
   cardBody: {
     color: '#d6d7da',
-    marginTop: 5,
-    marginLeft: 20,
+    padding: 5,
   },
   title: {
     fontSize: 30,

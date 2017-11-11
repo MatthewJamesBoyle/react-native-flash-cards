@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import SingleDeckView from '../components/SingleDeckView';
 import EmptyView from '../components/EmptyView';
 import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
@@ -18,12 +17,13 @@ export default class SingleDeckScreen extends Component {
         />
       ) : (
         <View>
-          <Text style={styles.mainTitle}>{title}</Text>
+          <Text style={styles.mainTitle}>{`Your "${title}" Deck`}</Text>
         </View>
       );
     return (
       <View style={styles.container}>
         {mainView}
+        <Text style={styles.emoji}>🤔🤔🤔</Text>
         <View style={styles.buttonContainer}>
           {questions.length >= 1 && (
             <PrimaryButton
@@ -45,6 +45,7 @@ export default class SingleDeckScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
+    marginTop: 70,
   },
   mainTitle: {
     fontSize: 50,
@@ -54,5 +55,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
+  },
+  emoji: {
+    textAlign: 'center',
+    fontSize: 50,
+    margin: 50,
   },
 });

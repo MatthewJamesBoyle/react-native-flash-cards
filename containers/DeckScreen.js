@@ -48,18 +48,25 @@ class DeckScreen extends Component {
       return (
         <ScrollView>
           <View>
-            {this.state.decks.map(deck => (
-              <TouchableOpacity
-                key={Object.keys(deck)}
-                onPress={() => navigate('SingleDeckScreen', deck)}
-              >
-                <Deck
-                  title={deck[Object.keys(deck)].title}
-                  body={`This Deck contains ${deck[Object.keys(deck)].questions
-                    .length} Questions`}
-                />
-              </TouchableOpacity>
-            ))}
+            {this.state.decks.map(deck => {
+              if (!deck[Object.keys(deck)].title) {
+                return;
+              }
+              return (
+                <TouchableOpacity
+                  key={Object.keys(deck)}
+                  onPress={() => navigate('SingleDeckScreen', deck)}
+                >
+                  <Deck
+                    title={deck[Object.keys(deck)].title}
+                    body={`This Deck contains ${deck[Object.keys(deck)]
+                      .questions
+                      ? deck[Object.keys(deck)].questions.length
+                      : 0} Questions`}
+                  />
+                </TouchableOpacity>
+              );
+            })}
           </View>
           <View style={styles.addDeckButton}>
             <StandardButton
