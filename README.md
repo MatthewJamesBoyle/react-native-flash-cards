@@ -16,9 +16,5 @@ to get it loaded up. This app was developed specifically for the iOS. But should
 * Delete a Deck.
 * Show best score on the card.
 * Add Nav Bar to android.
-
-
-## Before submission:
-* Tidy up UI.
 * Make layout work for both ios and android. 
 * Add Push notification.
