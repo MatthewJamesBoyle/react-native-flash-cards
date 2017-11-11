@@ -25,8 +25,17 @@ export default class SingleDeckScreen extends Component {
       <View style={styles.container}>
         {mainView}
         <View style={styles.buttonContainer}>
-          {questions.length >= 1 && <PrimaryButton title="Start a quiz" />}
-          <SecondaryButton title="Add Question" />
+          {questions.length >= 1 && (
+            <PrimaryButton
+              title="Start a quiz"
+              buttonPressed={e => navigate('QuizScreen', questions)}
+            />
+          )}
+          <SecondaryButton
+            title="Add Question"
+            buttonPressed={e =>
+              navigate('AddQuestionScreen', Object.keys(state.params))}
+          />
         </View>
       </View>
     );

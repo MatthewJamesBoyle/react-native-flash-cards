@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, AsyncStorage } from 'react-native';
 import AddQuestionView from '../components/AddQuestionView';
+import { showAlert } from '../utils';
 
 class AddQuestion extends Component {
   render() {
@@ -22,7 +23,8 @@ class AddQuestion extends Component {
       parsedItem.questions = newQs;
       const updatedItem = JSON.stringify(parsedItem);
       AsyncStorage.mergeItem(key, updatedItem, (err, result) => {
-        //Navigate back here.
+        showAlert('Boom!', 'question Added!', '...ok');
+        this.props.navigation.navigate('DeckScreen');
       });
     });
   };

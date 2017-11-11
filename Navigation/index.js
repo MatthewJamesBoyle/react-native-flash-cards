@@ -4,6 +4,7 @@ import DeckScreen from '../containers/DeckScreen';
 import NewDeckScreen from '../containers/NewDeckScreen';
 import AddQuestionScreen from '../containers/AddQuestion';
 import SingleDeckScreen from '../containers/SingleDeckScreen';
+import QuizScreen from '../containers/QuizScreen';
 
 const Navigation = StackNavigator({
   DeckScreen: {
@@ -28,6 +29,12 @@ const Navigation = StackNavigator({
     screen: SingleDeckScreen,
     navigationOptions: {
       headerTitle: 'Your Deck',
+    },
+  },
+  QuizScreen: {
+    screen: QuizScreen,
+    navigationOptions: {
+      headerTitle: "Let's get quizical",
     },
   },
 });
