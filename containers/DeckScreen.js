@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 10,
   },
-  empty: { flex: 9 },
+  empty: { flex: 6 },
   addDeckButton: {
     marginTop: 30,
     marginRight: 20,
