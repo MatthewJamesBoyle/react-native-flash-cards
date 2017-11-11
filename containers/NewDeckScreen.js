@@ -27,6 +27,7 @@ class NewDeckScreen extends Component {
       const added = await tryToAddToStorage(deckTitle);
       if (added) {
         showAlert('Nice!', 'Created a new deck', 'Time to Study!');
+        this.props.navigation.navigate('DeckScreen');
       } else {
         showAlert(
           'Error',
